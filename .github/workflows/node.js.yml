@@ -27,7 +27,6 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: 22.x
-        cache: 'npm'
     - run: npx miro-export -t ${{ github.event.inputs.token }} -b ${{ github.event.inputs.board }} -f ${{github.event.inputs.frame}} -o out.svg
     - uses: actions/upload-artifact@v4
       with:
