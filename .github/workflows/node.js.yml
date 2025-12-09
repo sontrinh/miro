@@ -19,20 +19,17 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x, 22.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
     - uses: actions/checkout@v4
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 22.x
         cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
+    - run: npx miro-export -t ${{ github.event.inputs.token }} -b ${{ github.event.inputs.board }} -f ${{github.event.inputs.frame}} -o out.svg
+    - uses: actions/upload-artifact@v4
+      with:
+        name: out
+        path: out.svg
