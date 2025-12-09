@@ -8,10 +8,14 @@ on:
     inputs:
       token:
         required: true
+        type: string
       board:
         required: true
+        type: string
+        default: uXjVIyZqiAI=
       frame:
         required: true
+        type: string
 
 jobs:
   build:
