@@ -27,8 +27,8 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: 22.x
-    - run: npx miro-export -t ${{ github.event.inputs.token }} -b ${{ github.event.inputs.board }} -f ${{github.event.inputs.frame}} -o out.svg
+    - run: npx miro-export -t "${{ github.event.inputs.token }}" -b "${{ github.event.inputs.board }}" -f "${{github.event.inputs.frame}}" -o "{frameName}.svg"
     - uses: actions/upload-artifact@v4
       with:
-        name: out
-        path: out.svg
+        name: ${{github.event.inputs.frame}}
+        path: ${{github.event.inputs.frame}}.svg
