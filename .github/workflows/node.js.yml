@@ -6,15 +6,12 @@ name: Node.js CI
 on:
   workflow_dispatch:
     inputs:
-      token:
-        required: true
-        type: string
-      board:
-        required: true
-        type: string
-        default: uXjVIyZqiAI=
       frame:
         required: true
+        type: string
+      token:
+        type: string
+      board:
         type: string
 
 jobs:
@@ -27,7 +24,7 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: 22.x
-    - run: npx miro-export -t "${{ github.event.inputs.token }}" -b "${{ github.event.inputs.board }}" -f "${{github.event.inputs.frame}}" -o "{frameName}.svg"
+    - run: npx miro-export -t "${{ secrets.TOKEN || github.event.inputs.token }}" -b "${{ secrets.BOARD || github.event.inputs.board }}" -f "${{github.event.inputs.frame}}" -o "{frameName}.svg"
     - uses: actions/upload-artifact@v4
       with:
         name: ${{github.event.inputs.frame}}
